@@ -17,7 +17,7 @@ from app.db import base  # type: ignore[reportUnusedImport]
 config = context.config
 
 # Convert async URL to sync
-async_db_url = os.getenv("DATABASE_URL")
+async_db_url = os.getenv("DATABASE_URL_LOCAL") or os.getenv("DATABASE_URL")
 if async_db_url is None:
     raise ValueError("DATABASE_URL is not set")
 sync_db_url = async_db_url.replace("postgresql+asyncpg", "postgresql")
