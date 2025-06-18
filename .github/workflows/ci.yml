@@ -65,4 +65,8 @@ jobs:
 
       - name: Run Alembic migrations
         run: |
-          alembic upgrade head
+          # Verify alembic.ini exists and has correct content
+          cat alembic.ini
+          
+          # Run migrations with debug output
+          PYTHONPATH=. alembic -c alembic.ini upgrade head
