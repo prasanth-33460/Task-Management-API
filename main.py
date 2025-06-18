@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.api.routes import health
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
@@ -34,6 +35,7 @@ app.include_router(users.router)
 app.include_router(projects.router)
 app.include_router(tasks.router)
 app.include_router(comments.router)
+app.include_router(health.router)
 
 @app.get("/", tags=["Health"])
 async def root():
