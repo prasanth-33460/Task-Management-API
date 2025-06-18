@@ -87,19 +87,19 @@ Task_Comments
 - `GET /tasks/{task_id}/comments` - List task comments
 - `POST /tasks/{task_id}/comments` - Add comment
 
-#### 3. Business Logic & Authorization
+   #### 3. Business Logic & Authorization
 
-**Role Permissions:**
-- **Admin**: Full access to all resources
-- **Manager**: Can create projects, manage projects they own, assign tasks
-- **User**: Can view assigned projects, update own assigned tasks, add comments
+   **Role Permissions:**
+   - **Admin**: Full access to all resources
+   - **Manager**: Can create projects, manage projects they own, assign tasks
+   - **User**: Can view assigned projects, update own assigned tasks, add comments
 
-**Access Rules:**
-- Users can only see projects they own or are assigned tasks in
-- Only project owners and admins can delete projects
-- Task assignment requires manager role or higher
-- Users can only update tasks assigned to them
-- Comments are visible to all project members
+   **Access Rules:**
+   - Users can only see projects they own or are assigned tasks in
+   - Only project owners and admins can delete projects
+   - Task assignment requires manager role or higher
+   - Users can only update tasks assigned to them
+   - Comments are visible to all project members
 
 #### 4. Technical Stack Requirements
 
