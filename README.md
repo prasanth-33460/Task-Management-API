@@ -93,3 +93,120 @@ TASK_MANAGEMENT_API/
 ```bash
 git clone git@github.com:prasanth-33460/Task-Management-API.git
 cd task-management-api
+```
+
+### 2. Run with Docker
+
+Make sure Docker and Docker Compose are installed.
+
+```bash
+docker-compose up --build
+```
+
+This will:
+
+Spin up PostgreSQL (localhost:5432)
+
+Run FastAPI app on <http://localhost:8000>
+
+Apply Alembic migrations automatically
+
+### 3. Run Locally (without Docker)
+
+```bash
+# Activate virtual environment
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set environment variables (or use .env file)
+export DATABASE_URL_LOCAL=postgresql+asyncpg://postgres:your_password@localhost:5432/taskdb
+export SECRET_KEY=your-secret
+export ALGORITHM=HS256
+export ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# Run migrations
+alembic upgrade head
+
+# Start the app
+uvicorn app.main:app --reload
+```
+
+### Authentication
+
+Use the /auth/register and /auth/login endpoints to obtain JWT tokens.
+
+```bash
+POST /auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin@example.com&password=secret
+```
+
+The response will include:
+
+```bash
+{
+  "access_token": "JWT_TOKEN_HERE",
+  "token_type": "bearer"
+}
+```
+
+Use it in headers:
+
+```bash
+Authorization: Bearer JWT_TOKEN_HERE
+```
+
+API Endpoints
+  Swagger UI: <http://localhost:8000/docs>
+  ReDoc: <http://localhost:8000/redoc>
+
+Auth
+POST /auth/register
+
+POST /auth/login
+
+Users
+GET /users/me
+
+PUT /users/me
+
+Projects
+GET /projects/
+
+POST /projects/
+
+GET /projects/{id}
+
+PUT /projects/{id}
+
+DELETE /projects/{id}
+
+Tasks
+GET /projects/{project_id}/tasks/
+
+POST /projects/{project_id}/tasks/
+
+GET /projects/{project_id}/tasks/{task_id}
+
+PUT /projects/{project_id}/tasks/{task_id}
+
+DELETE /projects/{project_id}/tasks/{task_id}
+
+PUT /projects/{project_id}/tasks/{task_id}/assign?user_id={id}
+
+Comments
+GET /tasks/{task_id}/comments/
+
+POST /tasks/{task_id}/comments/
+
+```bash
+| Role    | Can Create Project  | Assign Tasks   | View All Tasks     | Comment |
+| ------- | ------------------  | ------------   | --------------     | ------- |
+| Admin   | ✅                  | ✅            | ✅                 | ✅     |
+| Manager | ✅ (own)            | ✅            | ✅                 | ✅     |
+| User    | ❌                  | ❌            | Assigned only      | ✅      |
+```
