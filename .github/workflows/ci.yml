@@ -54,7 +54,3 @@ jobs:
 
       - name: Run Alembic migrations
         run: alembic upgrade head
-
-      - name: Run tests
-        run: |
-          echo "No tests yet. Add pytest commands here if needed."
