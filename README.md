@@ -29,6 +29,7 @@ A modern task and project management backend built using **FastAPI**, **PostgreS
 
 ## Project Structure
 
+```bash
 TASK_MANAGEMENT_API/
 │
 ├── app/
@@ -81,6 +82,7 @@ TASK_MANAGEMENT_API/
 ├── .env.example
 ├── requirements.txt
 └── README.md
+```
 
 ---
 
