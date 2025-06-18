@@ -10,6 +10,7 @@ from app.crud.user import get_user_by_email
 from app.core.security import decode_access_token
 from app.db.models.user import User, UserRole
 
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -45,7 +46,7 @@ async def get_current_user(
 
 def require_role(required_role: UserRole):
     async def role_checker(
-        current_user: Annotated[User, Depends(get_current_user)]
+            current_user: Annotated[User, Depends(get_current_user)]
     ) -> User:
         if current_user.role != required_role:
             raise HTTPException(
